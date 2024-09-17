@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 // Connection URL
-const url = 'mongodb+srv://michaelstockman:HGx$c#1XH&4tWrjh@cluster0.amuot.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'; // or your MongoDB Atlas connection string
+const url = 'mongodb+srv://michaelstockman:Freed0m.1@cluster0.amuot.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'; // or your MongoDB Atlas connection string
 const client = new MongoClient(url);
 const dbName = 'school';
 
@@ -47,6 +47,20 @@ app.delete('/students/:name', async (req, res) => {
   const collection = db.collection('students');
   const result = await collection.deleteOne({ name: req.params.name });
   res.send(`Deleted ${result.deletedCount} student(s)`);
+});
+
+app.get('/api/students', async (req, res) => {
+  const db = await connectDB();
+  const collection = db.collection('students');
+  const students = await collection.find({}).toArray();
+  res.json(students);
+});
+
+const path = require('path');
+
+// Serve the index.html file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Start server
