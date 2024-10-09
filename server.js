@@ -49,13 +49,14 @@ app.delete('/students/:name', async (req, res) => {
   res.send(`Deleted ${result.deletedCount} student(s)`);
 });
 
-app.get('/api/students', async (req, res) => {
+/*
+app.get('/students', async (req, res) => {
   const db = await connectDB();
   const collection = db.collection('students');
   const students = await collection.find({}).toArray();
   res.json(students);
 });
-
+*/
 const path = require('path');
 
 // Serve the index.html file
